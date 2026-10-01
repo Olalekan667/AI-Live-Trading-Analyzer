@@ -1,0 +1,6 @@
+{
+  "name": "ai-live-trading-analyzer",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+   
