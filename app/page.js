@@ -27,39 +27,9 @@ const PAIRS = [
   { label: "Gold vs US Dollar (XAUUSD)", symbol: "frxXAUUSD" },
   { label: "EUR vs USD", symbol: "frxEURUSD" },
   { label: "GBP vs USD", symbol: "frxGBPUSD" },
-  { label: "Volatility 100 (1s) Index - 2", symbol: "R_100_1s" },
 ];
 
 const TIMEFRAMES = ["1m", "5m", "15m", "4H", "1D"];
 
 export default function Page() {
-  const [pair, setPair] = useState(PAIRS[4]);
-  const [tf, setTf] = useState("5m");
-  const [price, setPrice] = useState(0);
-  const [history, setHistory] = useState([]);
-  const [signal, setSignal] = useState("WAITING");
-  const [conf, setConf] = useState(0);
-  const wsRef = useRef(null);
-  const lastNotify = useRef(0);
-
-  // Notification permission
-  const testNotify = () => {
-    if ("Notification" in window) {
-      Notification.requestPermission().then(p => {
-        if (p === "granted") {
-          new Notification("🔔 LEXXYPRO ACTIVE", { body: `🟢 NEW BUY SIGNAL - ${pair.label} - 92% - ${tf}` });
-          if (navigator.vibrate) navigator.vibrate(200);
-        }
-      });
-    }
-  };
-
-  const sendLiveAlert = (type, pct) => {
-    const now = Date.now();
-    if (now - lastNotify.current < 30000) return; // 30 sec cooldown
-    lastNotify.current = now;
-    if ("Notification" in window && Notification.permission === "granted") {
-      new Notification(`${type === "BUY"? "🟢" : "🔴"} NEW ${type} SIGNAL`, {
-        body: `${pair.label} - ${pct}% - ${tf}\nPrice: ${price}`,
-      });
-      if
+  const [pair, setPair]
