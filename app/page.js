@@ -1,0 +1,15 @@
+"use client";
+import { useState, useEffect } from "react";
+export default function Page(){
+  const [price,setPrice]=useState("60000");
+  const [signal,setSignal]=useState("ANALYZING");
+  useEffect(()=>{
+    const i=setInterval(()=>{
+      setPrice((60000+Math.random()*2000).toFixed(2));
+      const r=Math.random();
+      if(r>0.66) setSignal("BUY ▲"); else if(r>0.33) setSignal("SELL ▼"); else setSignal("HOLD ●");
+    },1500);
+    return()=>clearInterval(i);
+  },[]);
+  return(<div style={{background:"#0a0a0a",color:"white",minHeight:"100vh",padding:20,fontFamily:"sans-serif"}}><h1 style={{color:"#00ff88"}}>LEXXYPRO LIVE ANALYZER</h1><div style={{background:"#1a1a1a",padding:20,borderRadius:12,marginTop:20}}><h2>BTC/USDT: ${price}</h2><h1 style={{fontSize:48,color:signal.includes("BUY")?"#00ff88":signal.includes("SELL")?"#ff4444":"#ffaa00"}}>{signal}</h1><p>Live AI Analysis - Nigeria Works</p></div></div>)
+}
